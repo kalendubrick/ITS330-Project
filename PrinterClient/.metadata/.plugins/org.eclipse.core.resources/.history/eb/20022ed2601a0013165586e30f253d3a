@@ -1,0 +1,14 @@
+
+public class ImplementsRunnable implements Runnable
+{
+	private int counter = 0;
+	
+	@Override
+	public void run() 
+	{
+		//int counter;
+		this.counter++;
+		System.out.println("Implementsrunnable : counter" + this.counter);	
+	}
+
+}

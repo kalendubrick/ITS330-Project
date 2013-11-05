@@ -1,0 +1,12 @@
+
+public class ExtendsThread extends Thread 
+{
+	private int counter = 0;
+	
+	public void run() 
+	{
+		//int counter;
+		this.counter++;
+		System.out.println("ExtendsThread : counter" + this.counter);	
+	}
+}

@@ -1,0 +1,14 @@
+
+public class ClientTest 
+{
+	public static void main(String args[])
+	{
+		Client cl = new Client();
+		// cl.printDate();
+		
+		PrintClient pc = new PrintClient(1, 5);
+		System.out.println("my own id is " + pc.getID() + 
+				" and my parent ID is " + pc.getParentID());
+		pc.printDate();
+	}
+}

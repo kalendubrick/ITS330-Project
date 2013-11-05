@@ -1,0 +1,30 @@
+import java.util.Calendar;
+
+public class Time 
+{
+	
+	private String hour;
+	private String minute;
+	private String second;
+	
+	public Time()
+	{
+		Calendar ca = Calendar.getInstance();
+		hour = Integer.toString(ca.get(Calendar.HOUR)) + Integer.toString(ca.get(Calendar.AM_PM));
+	}
+	
+	public String getHour()
+	{
+		return hour;
+	}
+	
+	public String getMinute()
+	{
+		return minute;
+	}
+	
+	public String getSecond()
+	{
+		return second;
+	}
+}

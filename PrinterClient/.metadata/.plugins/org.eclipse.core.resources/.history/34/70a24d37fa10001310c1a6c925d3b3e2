@@ -1,0 +1,110 @@
+
+public class ClassTime extends Time 
+{
+	private int lengthOfOS;
+	private int osStartHour;
+	private int lengthOfSecurity;
+	private int securityStartHour;
+	private int lengthOfForensics;
+	private int forensicsStartHour;
+	
+	public ClassTime() 
+	{
+		lengthOfOS = 110;
+		osStartHour = 16;
+		lengthOfSecurity = 110;
+		securityStartHour = 18;
+		lengthOfForensics = 110;
+		forensicsStartHour = 20;
+	}
+	
+	public ClassTime(int lengthOfOS, int osStartHour, int lengthOfSecurity, int securityStartHour, int lengthOfForensics, int forensicsStartHour)
+	{
+		this.lengthOfOS = lengthOfOS;
+		this.osStartHour = osStartHour;
+		this.lengthOfSecurity = lengthOfSecurity;
+		this.securityStartHour = securityStartHour;
+		this.forensicsStartHour = forensicsStartHour;
+		this.lengthOfForensics = lengthOfForensics;
+	}
+	
+	public int getLengthOfOS()
+	{
+		return lengthOfOS;
+	}
+	
+	public void setLengthOfOS(int lengthOfOS)
+	{
+		this.lengthOfOS = lengthOfOS;
+	}
+	
+	public int getOSStartHour()
+	{
+		return osStartHour;
+	}
+	
+	public void setOSStartHour(int osStartHour)
+	{
+		this.osStartHour = osStartHour;
+	}
+	
+	public int getLengthOfSecurity()
+	{
+		return lengthOfSecurity;
+	}
+	
+	public void setLengthOfSecurity(int lengthOfSecurity)
+	{
+		this.lengthOfSecurity = lengthOfSecurity;
+	}
+	
+	public int getSecurityStartHour()
+	{
+		return securityStartHour;
+	}
+	
+	public void setSecurityStartHour(int securityStartHour)
+	{
+		this.securityStartHour = securityStartHour;
+	}
+	
+	public int getLengthOfForensics()
+	{
+		return lengthOfForensics;
+	}
+	
+	public void setLengthOfForensics(int lengthOfForensics)
+	{
+		this.lengthOfForensics = lengthOfForensics;
+	}
+	
+	public int getForensicsStartHour()
+	{
+		return forensicsStartHour;
+	}
+	
+	public void setForensicsStartHour(int forensicsStartHour)
+	{
+		this.forensicsStartHour = forensicsStartHour;
+	}
+	
+	public void determineClassTime()
+	{
+		if (super.getHour() == osStartHour || super.getHour() == osStartHour + (lengthOfOS / 60))
+		{
+			System.out.println("You should be in the OS class");
+		}
+		else if (super.getHour() == securityStartHour || super.getHour() == securityStartHour + (lengthOfSecurity / 60))
+		{
+			System.out.println("You should be in the Security class.");
+		}
+		else if (super.getHour() == forensicsStartHour || super.getHour() == forensicsStartHour + (lengthOfForensics / 60))
+		{
+			System.out.println("You should be in the Forensics class.");
+		}
+		else
+		{
+			System.out.println("You shouldn't be in class at all!");
+		}
+	}
+}

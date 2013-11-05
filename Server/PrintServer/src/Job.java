@@ -1,0 +1,82 @@
+import java.util.Random;
+import java.util.concurrent.*;
+import java.io.Serializable;
+
+public class Job implements Serializable{
+	
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7187252254050323395L;
+		private int JobID, OPNumber;	
+		private ConcurrentLinkedQueue<Operation> OPs;
+		private Random randGen;
+		private boolean isDone = false;
+		
+		public Job(){}		
+		
+		public Job(int a, int b)
+		{
+			this.JobID = a;
+			this.OPNumber =b;
+			this.OPs = new ConcurrentLinkedQueue<Operation>();
+			this.randGen = new Random();
+			
+			for (int i =0; i<b;i++)
+			{
+				 int r = randGen.nextInt(3);
+				Operation op = new Operation(this.JobID,r,i+1);
+				this.OPs.add(op);
+			}
+			
+		}		
+		
+		public int getJobID()
+		{
+			return this.JobID;
+		
+		}
+		
+		public void setJobID(int d)
+		{
+			this.JobID=d;
+		}	
+		
+		public int getOPNumber()
+		{
+			return this.OPNumber;
+		}
+		
+		public void setOPNumber(int d)
+		{
+			this.OPNumber=d;
+		}
+		
+		public ConcurrentLinkedQueue<Operation> getOPs()
+		{
+			return this.OPs;
+		}
+		
+		public void setOPs(ConcurrentLinkedQueue<Operation> d)
+		{
+			this.OPs=d;
+		}
+		
+		public synchronized boolean isDone()
+		{
+			return this.isDone;
+		}
+		
+		public synchronized void setIsDone(boolean d)
+		{
+			this.isDone=d;
+		}
+		
+		public void print(String msg) 
+		{
+			String threadName = Thread.currentThread().getName();
+			System.out.println(threadName + ": "+msg);			
+		}
+}
+
+

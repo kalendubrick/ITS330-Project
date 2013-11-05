@@ -1,0 +1,109 @@
+import java.util.Vector;
+import java.net.*;
+import java.io.*;
+
+public class PrintClient extends Client
+{
+	private int threadID;
+	private int arraySize;
+	private int array[];
+	
+	// java networking
+	protected String host;
+	protected int port;
+	
+	public PrintClient(int i, int j, int size)
+	{
+		this.threadID = i;
+		super.setID(j);
+		if (size > 1)
+		{
+			this.array = new int[size];
+			this.arraySize = size;
+		}
+		else
+			System.out.println("array size cannot be less than 0");
+	}
+	
+	public PrintClient(int id, String ip, int port)
+	{
+		this.threadID = id;
+		this.host = ip;
+		this.port = port;
+		//netInit(ip, port);
+		//creatorThread = Thread.currentThread();
+	}
+	
+	//a private method
+	private void netInit(String host, int port)
+	{
+		this.host = host;
+		this.port = port;
+	}
+	
+	public int getID()
+	{
+		return this.threadID;
+	}
+	public int getParentID()
+	{
+		return super.getID();
+	}
+	public int getThreadID()
+	{
+		return threadID;
+	}
+	public void setThreadID(int id)
+	{
+		this.threadID = id;
+	}
+	
+	public void connect()
+	{
+		try
+		{
+			// client request to make a connection with server
+			// whose IP is host, and port number is port
+			Socket client = new Socket(host, port);
+			// if the server does not exist, stopped, etc.
+			// it will throw an exception
+			handleConnection(client);
+		}
+		catch (Exception ioe)
+		{
+			// should put more code here to handle unexpected things
+			System.out.println("IOException: " + ioe);
+		}
+	}
+	
+	protected void handleConnection(Socket client) throws IOException
+	{
+		// very important part here, same as the server part
+		PrintWriter out = new PrintWriter(client.getOutputStream(), true);
+		BufferedReader in = (new BufferedReader
+				(new InputStreamReader(client.getInputStream())));
+		out.println("Printer Client");
+		System.out.println("Printer Client: Made connection to " + 
+				host + "\n" +
+				"and got '" + in.readLine() + "' in response");
+		
+		
+		client.close();
+	}
+	
+	public int searchArray(int d) 
+	{
+		int index = -1;
+		
+		for (int i = 0; i < this.arraySize; i++)
+		{
+			if (this.array[i] == d)
+			{
+				index = d;
+				break;
+			}
+		}
+		
+		return index;
+	}
+}

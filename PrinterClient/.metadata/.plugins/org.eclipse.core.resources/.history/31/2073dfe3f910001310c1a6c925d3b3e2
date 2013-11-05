@@ -1,0 +1,26 @@
+
+public class ClientTest 
+{
+	public static void main(String args[])
+	{
+		//Client cl = new Client();
+		// cl.printDate();
+		
+		//PrintClient pc = new PrintClient(1, 5, 3);
+		//System.out.println("my own id is " + pc.getID() + 
+		//		" and my parent ID is " + pc.getParentID());
+		//pc.printDate();
+		
+		ClassTime ti = new ClassTime();
+		System.out.print("The current time is: ");
+		System.out.println(ti.getHour() + ":" + ti.getMinute() + ":" + ti.getSecond());
+		
+		System.out.println("The OS class starts at " + ti.getOSStartHour() + 
+				":00 and lasts for " + ti.getLengthOfOS() + " minutes");
+		System.out.println("The Security class starts at " + ti.getSecurityStartHour() + 
+				":00 and lasts for " + ti.getLengthOfSecurity() + " minutes");
+		System.out.println("The Forensics class starts at " + ti.getForensicsStartHour() + 
+				":00 and lasts for " + ti.getLengthOfForensics() + " minutes");
+		
+	}
+}

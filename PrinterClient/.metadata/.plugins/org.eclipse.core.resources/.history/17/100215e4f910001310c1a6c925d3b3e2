@@ -1,0 +1,32 @@
+import java.util.Calendar;
+
+public class Time 
+{
+	
+	private int hour;
+	private int minute;
+	private int second;
+	
+	public Time()
+	{
+		Calendar ca = Calendar.getInstance();
+		hour = ca.get(Calendar.HOUR_OF_DAY);
+		minute = ca.get(Calendar.MINUTE);
+		second = ca.get(Calendar.SECOND);
+	}
+	
+	public int getHour()
+	{
+		return hour;
+	}
+	
+	public int getMinute()
+	{
+		return minute;
+	}
+	
+	public int getSecond()
+	{
+		return second;
+	}
+}

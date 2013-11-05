@@ -1,0 +1,82 @@
+
+public class ClassTime extends Time 
+{
+	private int lengthOfOS;
+	private int osStartHour;
+	private int lengthOfSecurity;
+	private int securityStartHour;
+	private int lengthOfForensics;
+	private int forensicsStartHour;
+	
+	public ClassTime() 
+	{
+		lengthOfOS = 110;
+		osStartHour = 16;
+		lengthOfSecurity = 110;
+		securityStartHour = 18;
+		lengthOfForensics = 110;
+		forensicsStartHour = 20;
+	}
+	
+	public int getLengthOfOS()
+	{
+		return lengthOfOS;
+	}
+	
+	public void setLengthOfOS(int lengthOfOS)
+	{
+		this.lengthOfOS = lengthOfOS;
+	}
+	
+	public int getOSStartHour()
+	{
+		return osStartHour;
+	}
+	
+	public void setOSStartHour(int osStartHour)
+	{
+		this.osStartHour = osStartHour;
+	}
+	
+	public int getLengthOfSecurity()
+	{
+		return lengthOfSecurity;
+	}
+	
+	public void setLengthOfSecurity(int lengthOfSecurity)
+	{
+		this.lengthOfSecurity = lengthOfSecurity;
+	}
+	
+	public int getSecurityStartHour()
+	{
+		return securityStartHour;
+	}
+	
+	public void setSecurityStartHour(int securityStartHour)
+	{
+		this.securityStartHour = securityStartHour;
+	}
+	
+	public int getLengthOfForensics()
+	{
+		return lengthOfForensics;
+	}
+	
+	public void setLengthOfForensics(int lengthOfForensics)
+	{
+		this.lengthOfForensics = lengthOfForensics;
+	}
+	
+	public int getForensicsStartHour()
+	{
+		return forensicsStartHour;
+	}
+	
+	public void setForensicsStartHour(int forensicsStartHour)
+	{
+		this.forensicsStartHour = forensicsStartHour;
+	}
+	
+	
+}

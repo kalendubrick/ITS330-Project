@@ -1,0 +1,78 @@
+/*
+ * Kalen Dubrick
+ */
+
+public class ClientTest 
+{
+	public static void main(String args[])
+	{
+		//Client cl = new Client();
+		// cl.printDate();
+		
+		//PrintClient pc = new PrintClient(1, 5, 3);
+		//System.out.println("my own id is " + pc.getID() + 
+		//		" and my parent ID is " + pc.getParentID());
+		//pc.printDate();
+		
+		//ClassTime ti = new ClassTime(110, 16, 110, 18, 110, 20);
+		//System.out.print("The current time is: ");
+		//System.out.println(ti.getHour() + ":" + ti.getMinute() + ":" + ti.getSecond());
+		
+		//System.out.println("The OS class starts at " + ti.getOSStartHour() + 
+		//		":00 and lasts for " + ti.getLengthOfOS() + " minutes");
+		//System.out.println("The Security class starts at " + ti.getSecurityStartHour() + 
+		//		":00 and lasts for " + ti.getLengthOfSecurity() + " minutes");
+		//System.out.println("The Forensics class starts at " + ti.getForensicsStartHour() + 
+		//		":00 and lasts for " + ti.getLengthOfForensics() + " minutes");
+		
+		//ti.determineClassTime();
+		//ti.setHour(5); // 5 AM
+		//ti.determineClassTime();
+		
+		/* basic networking test
+		String host = "127.0.0.1";
+		int port = 8088;
+		PrintClient pc = new PrintClient(1, host, port);
+		
+		pc.connect();
+		System.out.println("client is terminated");
+		*/
+		
+		ImplementsRunnable ir = new ImplementsRunnable();
+		Thread t1 = new Thread(ir);
+		t1.start();
+		try
+		{
+			Thread.sleep(1000);
+		}
+		catch (Exception e) {}
+		
+		Thread t2 = new Thread(ir);
+		t2.start();
+		try
+		{
+			Thread.sleep(1000);
+		}
+		catch (Exception e) {}
+		
+		Thread t3 = new Thread(ir);
+		t3.start();
+		
+		ExtendsThread et1 = new ExtendsThread();
+		et1.start();
+		try
+		{
+			Thread.sleep(1000);
+		}
+		catch (Exception e) {}
+		ExtendsThread et2 = new ExtendsThread();
+		et2.start();
+		try
+		{
+			Thread.sleep(1000);
+		}
+		catch (Exception e) {}
+		ExtendsThread et3 = new ExtendsThread();
+		et3.start();
+	}
+}

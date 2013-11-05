@@ -1,0 +1,22 @@
+
+public class PrintClient extends Client
+{
+	private int threadID;
+	
+	public int getID()
+	{
+		return this.threadID;
+	}
+	public int getParentID()
+	{
+		return super.getID();
+	}
+	public int getThreadID()
+	{
+		return threadID;
+	}
+	public void setThreadID(int id)
+	{
+		this.threadID = id;
+	}
+}
