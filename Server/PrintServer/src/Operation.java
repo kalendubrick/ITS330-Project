@@ -1,6 +1,10 @@
 import java.io.Serializable;
 public class Operation implements Serializable {
 	
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = -902903112050297779L;
 		private int JobID, OPID, index;		
 		private String JobDescription;
 		private boolean isDone = false;

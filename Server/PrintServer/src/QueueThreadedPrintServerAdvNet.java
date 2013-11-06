@@ -18,9 +18,17 @@ public class QueueThreadedPrintServerAdvNet implements Runnable
 		this.MaxConnections = maxConnections;
 		this.JobQueue = new ConcurrentLinkedQueue<Job>();
 		
-		// start your printer here
-		QueuePrintThread pt = new QueuePrintThread (this.JobQueue);
+		QueuePrintThread pt = new QueuePrintThread ("PrintThread 1", this.JobQueue);
 		pt.start();
+		
+		QueuePrintThread pt2 = new QueuePrintThread ("PrintThread 2", this.JobQueue);
+		pt2.start();
+		
+		QueueComputeThread ct = new QueueComputeThread ("ComputeThread 1", this.JobQueue);
+		ct.start();
+		
+		QueueComputeThread ct2 = new QueueComputeThread ("ComputeThread 2", this.JobQueue);
+		ct2.start();
 		
 		// start your computing thread here
 		
@@ -140,6 +148,12 @@ class QueuePrintThread extends Thread
 		this.jobQ = queue;
 	}
 	
+	public QueuePrintThread(String threadName, ConcurrentLinkedQueue<Job> queue)
+	{
+		super(threadName);
+		this.jobQ = queue;
+	}
+	
 	public void run()
 	{
 		while(!stop)
@@ -159,7 +173,66 @@ class QueuePrintThread extends Thread
 					if (op.getOPID() == 1)
 					{
 						// print the job description to simulate the printing
-						System.out.println("The operation type is 1 for Job " + op.getJobID());
+						System.out.println("The operation type is 1 for Job " + op.getJobID() +
+											"\nAnother quality job from " + Thread.currentThread().getName());
+							
+						if (opQ.isEmpty()) // check again after running the op
+							job.setIsDone(true);
+					}
+					else
+						opQ.add(op);
+					
+					if (!job.isDone())
+						jobQ.add(job);
+				}		
+			}
+			
+			try
+			{
+				QueuePrintThread.sleep(1000);
+			}
+			catch (Exception e) { e.printStackTrace(); }
+			// if no job, thread block itself to yield CPU
+		}
+	}
+}
+
+class QueueComputeThread extends Thread
+{
+	private ConcurrentLinkedQueue<Job> jobQ;
+	private boolean stop = false;
+	
+	public QueueComputeThread(ConcurrentLinkedQueue<Job> queue)
+	{
+		super("TheComputingThread");
+		this.jobQ = queue;
+	}
+	
+	public QueueComputeThread(String threadName, ConcurrentLinkedQueue<Job> queue)
+	{
+		super(threadName);
+		this.jobQ = queue;
+	}
+	
+	public void run()
+	{
+		while(!stop)
+		{
+			while (!jobQ.isEmpty())
+			{
+				int i;
+				int size = jobQ.size();
+				for (i = 0; i < size; i++)
+				{
+					Job job = jobQ.remove();
+				
+					ConcurrentLinkedQueue<Operation> opQ = job.getOPs();
+					
+					Operation op = opQ.remove();
+						
+					if (op.getOPID() == 2)
+					{
+						// do some computation here
 							
 						if (opQ.isEmpty()) // check again after running the op
 							job.setIsDone(true);

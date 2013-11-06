@@ -1,32 +1,5 @@
 
 public class ServerTest {
-
-	public void TestServer()
-	{
-		int port = 8088;
-		PrintServer ps = new PrintServer(port, 5000);
-			
-		ps.listen(); // ask a server to listen for connections from clients
-		System.out.println("server is terminated");
-	}
-	
-	public void TestServerAdvNet()
-	{
-		int port = 8088;
-		PrintServerAdvNet ps = new PrintServerAdvNet(port, 5000);
-		
-		ps.listen(); // ask a server to listen for connections from clients
-		System.out.println("server is terminated");
-	}
-	
-	public void TestThreadedServerAdvNet()
-	{
-		int port = 8088;
-		ThreadedPrintServerAdvNet ps = new ThreadedPrintServerAdvNet(port, 5000);
-		
-		ps.listen(); // ask a server to listen for connections from clients
-		System.out.println("server is terminated");
-	}
 	
 	public void TestQueueThreadedServerAdvNet()
 	{
