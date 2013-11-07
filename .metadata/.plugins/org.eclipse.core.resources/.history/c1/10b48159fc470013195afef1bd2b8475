@@ -191,7 +191,6 @@ class QueuePrintThread extends Thread
 					{
 						jobQ.add(job);
 						System.out.println("Job " + job.getJobID() + "put back on queue");
-					}
 				}		
 			}
 			

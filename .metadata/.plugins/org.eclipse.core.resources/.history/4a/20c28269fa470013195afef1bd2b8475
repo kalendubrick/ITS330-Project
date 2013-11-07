@@ -107,8 +107,8 @@ public class QueueThreadedPrintServerAdvNet implements Runnable
 		{
 			Job job = (Job)objIn.readObject();
 			this.JobQueue.add(job);
-			System.out.println("Job ID is " + job.getJobID() + 
-					" added to queue");
+			System.out.println("The Job ID is " + job.getJobID() + 
+					" and the number of ops is " + job.getOPNumber());
 		}
 		catch (Exception e)
 		{
@@ -165,39 +165,30 @@ class QueuePrintThread extends Thread
 				for (i = 0; i < size; i++)
 				{
 					Job job = jobQ.remove();
-					System.out.println("Job " + job.getJobID() + " pulled off job queue");
+				
 					ConcurrentLinkedQueue<Operation> opQ = job.getOPs();
 					
 					Operation op = opQ.remove();
-					System.out.println("Operation " + op.getOPID() + " for " + job.getJobID() + 
-											"pulled off operation queue");
 						
-					if (op.getOPID() == 3)
+					if (op.getOPID() == 1)
 					{
 						// print the job description to simulate the printing
-						System.out.println(op.getJobDescription() +
+						System.out.println("The operation type is 1 for Job " + op.getJobID() +
 											"\nAnother quality job from " + Thread.currentThread().getName());
 							
 						if (opQ.isEmpty()) // check again after running the op
-						{
 							job.setIsDone(true);
-							System.out.println("Job " + job.getJobID() + " completed");
-						}
 					}
 					else
 						opQ.add(op);
 					
 					if (!job.isDone())
-					{
 						jobQ.add(job);
-						System.out.println("Job " + job.getJobID() + "put back on queue");
-					}
 				}		
 			}
 			
 			try
 			{
-				System.out.println("Queue is empty - sleeping");
 				QueuePrintThread.sleep(1000);
 			}
 			catch (Exception e) { e.printStackTrace(); }
