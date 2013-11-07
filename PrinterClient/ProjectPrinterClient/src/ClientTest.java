@@ -12,7 +12,7 @@ public class ClientTest {
 //	
 	
 	public void testThreadedClient(){	//Lab 7	passing data objects
-		String host = "localhost";
+		String host = "205.215.116.66";
 	    int port = 8088;  
 	    for (int i = 0; i < 10; i++)
 	    {

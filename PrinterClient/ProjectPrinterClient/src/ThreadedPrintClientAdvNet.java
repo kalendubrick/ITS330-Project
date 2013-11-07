@@ -20,7 +20,7 @@ public class ThreadedPrintClientAdvNet extends Client implements Runnable
 		this.port = port;
 		// create job for this thread
 		this.ran = new Random();
-		this.job = new Job(this.ID, this.ran.nextInt(3)+1);
+		this.job = new Job(this.ID, 3);
 	}
 	
 	public void run()
