@@ -260,13 +260,6 @@ class QueueComputeThread extends Thread
 					jobQ.add(job);
 					System.out.println("Job " + job.getJobID() + " put back on queue");
 				}
-				
-				try
-				{
-					System.out.println("Taking a break before next job");
-					QueuePrintThread.sleep(10);
-				}
-				catch (Exception e) { e.printStackTrace(); }
 			}		
 			
 			try

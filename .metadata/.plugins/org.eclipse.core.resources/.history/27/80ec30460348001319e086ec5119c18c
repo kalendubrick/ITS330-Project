@@ -24,8 +24,8 @@ public class QueueThreadedPrintServerAdvNet implements Runnable
 		//QueuePrintThread pt2 = new QueuePrintThread ("PrintThread 2", this.JobQueue);
 		//pt2.start();
 		
-		QueueComputeThread ct = new QueueComputeThread ("ComputeThread 1", this.JobQueue);
-		ct.start();
+		//QueueComputeThread ct = new QueueComputeThread ("ComputeThread 1", this.JobQueue);
+		//ct.start();
 		
 		//QueueComputeThread ct2 = new QueueComputeThread ("ComputeThread 2", this.JobQueue);
 		//ct2.start();
@@ -160,43 +160,41 @@ class QueuePrintThread extends Thread
 		{
 			while (!jobQ.isEmpty())
 			{
-				Job job = jobQ.remove();
-				System.out.println("Job " + job.getJobID() + " pulled off job queue by " +
+				int i;
+				int size = jobQ.size();
+				for (i = 0; i < size; i++)
+				{
+					Job job = jobQ.remove();
+					System.out.println("Job " + job.getJobID() + " pulled off job queue by " +
 										Thread.currentThread().getName());
-				ConcurrentLinkedQueue<Operation> opQ = job.getOPs();
+					ConcurrentLinkedQueue<Operation> opQ = job.getOPs();
 					
-				Operation op = opQ.remove();
-				System.out.println("Operation " + op.getOPID() + " for " + job.getJobID() + 
+					Operation op = opQ.remove();
+					System.out.println("Operation " + op.getOPID() + " for " + job.getJobID() + 
 											" pulled off operation queue by " + Thread.currentThread().getName());
 						
-				if (op.getOPID() == 3)
-				{
-					// print the job description to simulate the printing
-					System.out.println(op.getJobDescription() +
+					if (op.getOPID() == 3)
+					{
+						// print the job description to simulate the printing
+						System.out.println(op.getJobDescription() +
 											"\nAnother quality job from " + Thread.currentThread().getName());
 							
-					if (opQ.isEmpty()) // check again after running the op
-					{
-						job.setIsDone(true);
-						System.out.println("Job " + job.getJobID() + " completed");
+						if (opQ.isEmpty()) // check again after running the op
+						{
+							job.setIsDone(true);
+							System.out.println("Job " + job.getJobID() + " completed");
+						}
 					}
-				}
-				else
-					opQ.add(op);
+					else
+						opQ.add(op);
 					
-				if (!job.isDone())
-				{
-					jobQ.add(job);
-					System.out.println("Job " + job.getJobID() + " put back on queue");
-				}
-				
-				try
-				{
-					System.out.println("Taking a break before next job");
-					QueuePrintThread.sleep(10);
-				}
-				catch (Exception e) { e.printStackTrace(); }
-			}		
+					if (!job.isDone())
+					{
+						jobQ.add(job);
+						System.out.println("Job " + job.getJobID() + "put back on queue");
+					}
+				}		
+			}
 			
 			try
 			{
@@ -232,42 +230,30 @@ class QueueComputeThread extends Thread
 		{
 			while (!jobQ.isEmpty())
 			{
-				Job job = jobQ.remove();
-				System.out.println("Job " + job.getJobID() + " pulled off job queue by " +
-							Thread.currentThread().getName());
+				int i;
+				int size = jobQ.size();
+				for (i = 0; i < size; i++)
+				{
+					Job job = jobQ.remove();
 				
-				ConcurrentLinkedQueue<Operation> opQ = job.getOPs();
+					ConcurrentLinkedQueue<Operation> opQ = job.getOPs();
 					
-				Operation op = opQ.remove();
-				System.out.println("Operation " + op.getOPID() + " for " + job.getJobID() + 
-							" pulled off operation queue by " + Thread.currentThread().getName());
+					Operation op = opQ.remove();
 						
-				if (op.getOPID() == 2)
-				{
-					// do some computation here
-							
-					if (opQ.isEmpty()) // check again after running the op
+					if (op.getOPID() == 2)
 					{
-						job.setIsDone(true);
-						System.out.println("Job " + job.getJobID() + " completed");
+						// do some computation here
+							
+						if (opQ.isEmpty()) // check again after running the op
+							job.setIsDone(true);
 					}
-				}
-				else
-					opQ.add(op);
-				
-				if (!job.isDone())
-				{
-					jobQ.add(job);
-					System.out.println("Job " + job.getJobID() + " put back on queue");
-				}
-				
-				try
-				{
-					System.out.println("Taking a break before next job");
-					QueuePrintThread.sleep(10);
-				}
-				catch (Exception e) { e.printStackTrace(); }
-			}		
+					else
+						opQ.add(op);
+					
+					if (!job.isDone())
+						jobQ.add(job);
+				}		
+			}
 			
 			try
 			{
