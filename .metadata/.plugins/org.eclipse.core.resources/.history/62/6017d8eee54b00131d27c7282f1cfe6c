@@ -160,12 +160,6 @@ class QueuePrintThread extends Thread
 		{
 			while (!jobQ.isEmpty())
 			{
-				try
-				{
-					QueuePrintThread.sleep(20);
-				}
-				catch (Exception e) { e.printStackTrace(); }
-				
 				Job job = jobQ.remove();
 				System.out.println("Job " + job.getJobID() + " pulled off job queue by " +
 										Thread.currentThread().getName());
@@ -195,6 +189,13 @@ class QueuePrintThread extends Thread
 					jobQ.add(job);
 					System.out.println("Job " + job.getJobID() + " put back on queue");
 				}
+				
+				try
+				{
+					System.out.println("Taking a break before next job");
+					QueuePrintThread.sleep(10);
+				}
+				catch (Exception e) { e.printStackTrace(); }
 			}		
 			
 			try
@@ -231,12 +232,6 @@ class QueueComputeThread extends Thread
 		{
 			while (!jobQ.isEmpty())
 			{
-				try
-				{
-					QueuePrintThread.sleep(30);
-				}
-				catch (Exception e) { e.printStackTrace(); }
-				
 				Job job = jobQ.remove();
 				System.out.println("Job " + job.getJobID() + " pulled off job queue by " +
 							Thread.currentThread().getName());
@@ -265,6 +260,13 @@ class QueueComputeThread extends Thread
 					jobQ.add(job);
 					System.out.println("Job " + job.getJobID() + " put back on queue");
 				}
+				
+				try
+				{
+					System.out.println("Taking a break before next job");
+					QueuePrintThread.sleep(10);
+				}
+				catch (Exception e) { e.printStackTrace(); }
 			}		
 			
 			try
