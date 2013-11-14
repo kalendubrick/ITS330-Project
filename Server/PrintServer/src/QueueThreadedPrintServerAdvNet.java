@@ -159,13 +159,15 @@ class QueuePrintThread extends Thread
 	{
 		while(!stop)
 		{
+			try
+			{
+				QueuePrintThread.sleep(20);
+			}
+			catch (Exception e) { e.printStackTrace(); }
+			
 			while (!stop && !jobQ.isEmpty())
 			{
-				try
-				{
-					QueuePrintThread.sleep(20);
-				}
-				catch (Exception e) { e.printStackTrace(); }
+				
 				
 				Job job = jobQ.remove();
 				System.out.println("Job " + job.getJobID() + " pulled off job queue by " +
@@ -236,13 +238,15 @@ class QueueComputeThread extends Thread
 	{
 		while(!stop)
 		{
+			try
+			{
+				QueuePrintThread.sleep(30);
+			}
+			catch (Exception e) { e.printStackTrace(); }
+			
 			while (!stop && !jobQ.isEmpty())
 			{
-				try
-				{
-					QueuePrintThread.sleep(30);
-				}
-				catch (Exception e) { e.printStackTrace(); }
+				
 				
 				Job job = jobQ.remove();
 				System.out.println("Job " + job.getJobID() + " pulled off job queue by " +
