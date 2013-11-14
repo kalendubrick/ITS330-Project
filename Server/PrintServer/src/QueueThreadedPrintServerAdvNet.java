@@ -158,7 +158,7 @@ class QueuePrintThread extends Thread
 	{
 		while(!stop)
 		{
-			while (!jobQ.isEmpty())
+			while (!stop && !jobQ.isEmpty())
 			{
 				try
 				{
@@ -186,6 +186,10 @@ class QueuePrintThread extends Thread
 						job.setIsDone(true);
 						System.out.println("Job " + job.getJobID() + " completed");
 					}
+				}
+				else if (op.getOPID() == 0)
+				{
+					stop = true;
 				}
 				else
 					opQ.add(op);
@@ -256,6 +260,10 @@ class QueueComputeThread extends Thread
 						job.setIsDone(true);
 						System.out.println("Job " + job.getJobID() + " completed");
 					}
+				}
+				else if (op.getOPID() == 0)
+				{
+					stop = true;
 				}
 				else
 					opQ.add(op);

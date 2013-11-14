@@ -19,23 +19,7 @@ public class ClientTest {
 	    	ThreadedPrintClientAdvNet pc = new ThreadedPrintClientAdvNet(i, host, port);
 	    	Thread t = new Thread(pc);
 	    	t.start();
-	    }	
-	    try
-	    {
-	    	Thread.sleep(2000);
-	    	ThreadedPrintClientAdvNet pc1 = new ThreadedPrintClientAdvNet(-1, host, port);
-	    	Thread t = new Thread(pc1);
-	    	t.start();
-	    }
-	    catch(Exception e) { e.printStackTrace(); }
-	    try
-	    {
-	    	Thread.sleep(2000);
-	    	ThreadedPrintClientAdvNet pc2 = new ThreadedPrintClientAdvNet(-2, host, port);
-	    	Thread t = new Thread(pc2);
-	    	t.start();
-	    }
-	    catch(Exception e) { e.printStackTrace(); }
+	    }		
 	}
 	
 	public static void main(String args[]){	

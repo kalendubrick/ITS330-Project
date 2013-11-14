@@ -22,16 +22,23 @@ public class Job implements Serializable{
 			this.OPs = new ConcurrentLinkedQueue<Operation>();
 			this.randGen = new Random();
 			
-			for (int i = 0; i < b; i++)
+			if (JobID < 0)
 			{
-				int r = randGen.nextInt(3) + 1;
-				System.out.println("***Ran gen OPID is: " + r);
-				Operation op = new Operation(this.JobID,r,i+1);
-				System.out.println("***Ran gen OPID is after object is made: " + r);
+				Operation op = new Operation(this.JobID, 0, 0);
 				this.OPs.add(op);
-				System.out.println("^^^Value of OP object " + op.getOPID());
 			}
-			
+			else
+			{
+				for (int i = 0; i < b; i++)
+				{
+					int r = randGen.nextInt(2) + 1;
+					System.out.println("***Ran gen OPID is: " + r);
+					Operation op = new Operation(this.JobID,r,i+1);
+					System.out.println("***Ran gen OPID is after object is made: " + r);
+					this.OPs.add(op);
+					System.out.println("^^^Value of OP object " + op.getOPID());
+				}
+			}
 		}		
 		
 		public int getJobID()
