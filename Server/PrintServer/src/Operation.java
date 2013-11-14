@@ -40,6 +40,15 @@ public class Operation implements Serializable {
 			String threadName = Thread.currentThread().getName();
 			System.out.println(threadName + ": "+msg);			
 		}
+		
+		public void compute(int num1, int num2)
+		{
+			int temp;
+			
+			temp = num1 + num2;
+			
+			System.out.println(num1 + " + " + num2 + " = " + temp);
+		}
 }
 
 

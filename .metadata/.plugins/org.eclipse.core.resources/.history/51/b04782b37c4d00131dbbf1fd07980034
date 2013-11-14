@@ -5,7 +5,6 @@
 import java.net.*;
 import java.io.*;
 import java.util.concurrent.*;
-import java.util.Random;
 
 public class QueueThreadedPrintServerAdvNet implements Runnable
 {
@@ -176,11 +175,11 @@ class QueuePrintThread extends Thread
 				System.out.println("Operation " + op.getOPID() + " for " + job.getJobID() + 
 											" pulled off operation queue by " + Thread.currentThread().getName());
 						
-				if (op.getOPID() == 2)
+				if (op.getOPID() == 3)
 				{
 					// print the job description to simulate the printing
-					op.print(op.getJobDescription());
-					System.out.println("Another quality job from " + Thread.currentThread().getName());
+					System.out.println(op.getJobDescription() +
+											"\nAnother quality job from " + Thread.currentThread().getName());
 							
 					if (opQ.isEmpty()) // check again after running the op
 					{
@@ -191,8 +190,6 @@ class QueuePrintThread extends Thread
 				else if (op.getOPID() == 0)
 				{
 					stop = true;
-					job.setIsDone(true);
-					System.out.println("Thread terminating!");
 				}
 				else
 					opQ.add(op);
@@ -236,7 +233,7 @@ class QueueComputeThread extends Thread
 	{
 		while(!stop)
 		{
-			while (!stop && !jobQ.isEmpty())
+			while (!jobQ.isEmpty())
 			{
 				try
 				{
@@ -254,15 +251,9 @@ class QueueComputeThread extends Thread
 				System.out.println("Operation " + op.getOPID() + " for " + job.getJobID() + 
 							" pulled off operation queue by " + Thread.currentThread().getName());
 						
-				if (op.getOPID() == 1)
+				if (op.getOPID() == 2)
 				{
 					// do some computation here
-					Random ran = new Random();
-					
-					int num1 = ran.nextInt();
-					int num2 = ran.nextInt();
-					
-					op.compute(num1, num2);
 							
 					if (opQ.isEmpty()) // check again after running the op
 					{
@@ -273,8 +264,6 @@ class QueueComputeThread extends Thread
 				else if (op.getOPID() == 0)
 				{
 					stop = true;
-					job.setIsDone(true);
-					System.out.println("Thread terminating!");
 				}
 				else
 					opQ.add(op);
@@ -288,7 +277,7 @@ class QueueComputeThread extends Thread
 			
 			try
 			{
-				QueueComputeThread.sleep(1000);
+				QueuePrintThread.sleep(1000);
 			}
 			catch (Exception e) { e.printStackTrace(); }
 			// if no job, thread block itself to yield CPU
