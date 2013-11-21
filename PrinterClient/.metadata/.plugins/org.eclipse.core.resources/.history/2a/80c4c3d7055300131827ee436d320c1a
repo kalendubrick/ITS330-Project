@@ -11,10 +11,10 @@ public class ClientTest {
 	}
 //	
 	
-	public void testThreadedClient(){	//Lab 7	passing data objects
-		String host = "127.0.0.1";
-	    int port = 8088;  
-	    for (int i = 0; i < 10; i++)
+	public void testThreadedClient(String ip, int portNum, int clients){	//Lab 7	passing data objects
+		String host = ip;
+	    int port = portNum;  
+	    for (int i = 0; i < clients; i++)
 	    {
 	    	ThreadedPrintClientAdvNet pc = new ThreadedPrintClientAdvNet(i, host, port);
 	    	Thread t = new Thread(pc);
@@ -40,6 +40,10 @@ public class ClientTest {
 	
 	public static void main(String args[]){	
 		
+		String ip = args[0];
+		int port = Integer.valueOf(args[1]);
+		int clients = Integer.valueOf(args[2]);
+		
 		ClientTest ct = new ClientTest();
 		//ct.testOOAD();
 		//ct.testNetworks();
@@ -48,7 +52,7 @@ public class ClientTest {
 		//ct.testFileIO(0, 1, 10);
 		//ct.demoSyn();
 		//ct.testAdvNetworks();
-		ct.testThreadedClient();
+		ct.testThreadedClient(ip, port, clients);
 		
 	}
 }

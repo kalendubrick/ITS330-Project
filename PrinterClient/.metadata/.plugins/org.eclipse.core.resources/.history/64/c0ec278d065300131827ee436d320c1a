@@ -40,9 +40,9 @@ public class ClientTest {
 	
 	public static void main(String args[]){	
 		
-		if (args.length < 3 || args[0] == "-h")
+		if (args.length < 3)
 		{
-			System.out.println("You must provide a value for IP Address, port number, and number of clients\n");
+			System.out.println("You must provide a value for IP Address, port number, and number of clients");
 			System.out.println("IE: java -jar client.jar 123.456.789.234 8088 1000");
 			System.out.println("Where 123.456.789.234 is the IP address of the server you are trying to send print clients to");
 			System.out.println("Where 8088 is the port number the server is running on that you are trying to send print clients to");
